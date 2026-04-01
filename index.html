@@ -175,6 +175,7 @@
   .channel-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
   .channel-item:last-child { border-bottom: none; }
   .channel-logo { width: 38px; height: 38px; border-radius: 6px; object-fit: contain; background: var(--surface2); flex-shrink: 0; }
+  .channel-logo-placeholder { width: 38px; height: 38px; border-radius: 6px; background: var(--surface2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--text2); font-size: 14px; font-weight: 700; text-transform: uppercase; }
   .channel-info { flex: 1; min-width: 0; }
   .channel-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .channel-meta { font-size: 11px; color: var(--text2); margin-top: 2px; }
@@ -219,6 +220,7 @@
   .sbc-check { position: absolute; top: 16px; right: 16px; font-size: 20px; opacity: 0; transition: opacity 0.15s; }
   .section-big-card.selected .sbc-check { opacity: 1; }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -793,44 +795,59 @@ function renderCategories() {
     el.innerHTML = `<div class="empty-state"><div class="empty-icon">${SECTIONS[currentSection].icon}</div><p>No hay categorías en esta sección.<br>Creá la primera.</p></div>`;
     return;
   }
-  el.innerHTML = filtered.map(cat => `
-    <div class="cat-card">
-      <div class="cat-card-header" onclick="toggleCatBody('${cat.id}')">
-        <div class="flex items-center gap-12">
-          <span style="font-size:22px">${cat.icon || '📂'}</span>
-          <div>
-            <div style="font-weight:700;font-size:15px">${cat.name}</div>
-            <div class="text-muted text-sm">${(cat.channels||[]).length} elemento(s) · orden ${cat.order}</div>
+  el.innerHTML = filtered.map(cat => {
+    const channelsHtml = (cat.channels||[]).map((ch, ci) => {
+      const hasLogo = ch.logo && ch.logo.trim() !== '';
+      const initial = (ch.name || '?')[0].toUpperCase();
+      const logoHtml = hasLogo 
+        ? `<img src="${ch.logo}" class="channel-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display:block;">
+           <div class="channel-logo-placeholder" style="display:none;">${initial}</div>`
+        : `<div class="channel-logo-placeholder" style="display:flex;">${initial}</div>`;
+      
+      return `
+        <div class="channel-item">
+          <div style="position:relative;width:38px;height:38px;flex-shrink:0;">
+            ${logoHtml}
+          </div>
+          <div class="channel-info">
+            <div class="channel-name">${ch.name}</div>
+            <div class="channel-meta">${ch.streams?.length||0} señal(es)${ch.description ? ' · '+ch.description : ''}</div>
+          </div>
+          <div class="flex gap-8">
+            <button class="btn btn-ghost btn-sm" onclick="openEditChannelModal('${cat.id}', ${ci})">✏️</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteChannel('${cat.id}', ${ci})">🗑️</button>
           </div>
         </div>
-        <div class="flex items-center gap-8">
-          <span class="badge ${cat.active ? 'badge-success' : 'badge-danger'}">${cat.active ? 'Activa' : 'Inactiva'}</span>
-          <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();editCategory(${JSON.stringify({...cat, channels:[]}).replace(/'/g,"&#39;")})">✏️ Editar</button>
-          <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openAddChannelModal('${cat.id}')">+ Contenido</button>
-          <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteCategory('${cat.id}')">🗑️</button>
-          <span style="color:var(--text2);font-size:18px">▾</span>
+      `;
+    }).join('');
+
+    return `
+      <div class="cat-card">
+        <div class="cat-card-header" onclick="toggleCatBody('${cat.id}')">
+          <div class="flex items-center gap-12">
+            <span style="font-size:22px">${cat.icon || '📂'}</span>
+            <div>
+              <div style="font-weight:700;font-size:15px">${cat.name}</div>
+              <div class="text-muted text-sm">${(cat.channels||[]).length} elemento(s) · orden ${cat.order}</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-8">
+            <span class="badge ${cat.active ? 'badge-success' : 'badge-danger'}">${cat.active ? 'Activa' : 'Inactiva'}</span>
+            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();editCategory(${JSON.stringify({...cat, channels:[]}).replace(/'/g,"&#39;")})">✏️ Editar</button>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openAddChannelModal('${cat.id}')">+ Contenido</button>
+            <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteCategory('${cat.id}')">🗑️</button>
+            <span style="color:var(--text2);font-size:18px">▾</span>
+          </div>
+        </div>
+        <div class="cat-card-body" id="cat-body-${cat.id}">
+          ${(cat.channels||[]).length === 0
+            ? '<p class="text-muted text-sm" style="padding:12px 0">Sin contenido aún. Usá "+ Contenido" para agregar.</p>'
+            : channelsHtml
+          }
         </div>
       </div>
-      <div class="cat-card-body" id="cat-body-${cat.id}">
-        ${(cat.channels||[]).length === 0
-          ? '<p class="text-muted text-sm" style="padding:12px 0">Sin contenido aún. Usá "+ Contenido" para agregar.</p>'
-          : (cat.channels||[]).map((ch, ci) => `
-            <div class="channel-item">
-              <img src="${ch.logo||''}" class="channel-logo" onerror="this.src='';this.style.background='var(--surface2)'">
-              <div class="channel-info">
-                <div class="channel-name">${ch.name}</div>
-                <div class="channel-meta">${ch.streams?.length||0} señal(es)${ch.description ? ' · '+ch.description : ''}</div>
-              </div>
-              <div class="flex gap-8">
-                <button class="btn btn-ghost btn-sm" onclick="openEditChannelModal('${cat.id}', ${ci})">✏️</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteChannel('${cat.id}', ${ci})">🗑️</button>
-              </div>
-            </div>
-          `).join('')
-        }
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function toggleCatBody(catId) {
@@ -931,176 +948,4 @@ function addStreamRow(stream = null) {
   row.innerHTML = `
     <button class="remove-stream" onclick="this.parentElement.remove()" title="Eliminar señal">✕</button>
     <div class="grid-2" style="gap:8px">
-      <div><label class="form-label">Label</label><input class="form-input stream-label" value="${stream?.label||'Stream '+(idx+1)}" placeholder="Stream ${idx+1}"></div>
-      <div><label class="form-label">Calidad</label><input class="form-input stream-quality" value="${stream?.quality||'HD'}" placeholder="HD"></div>
-      <div style="grid-column:span 2"><label class="form-label">URL *</label><input class="form-input stream-url" value="${stream?.url||''}" placeholder="http://…/stream.m3u8"></div>
-      <div><label class="form-label">Tipo</label>
-        <select class="form-select stream-type">
-          ${['auto','hls','dash','mp4','rtsp'].map(t => `<option value="${t}" ${stream?.type===t?'selected':''}>${t.toUpperCase()}</option>`).join('')}
-        </select>
-      </div>
-    </div>`;
-  container.appendChild(row);
-}
-
-async function saveChannel() {
-  const cat = categories.find(c => c.id === addChannelCatId);
-  if (!cat) return;
-  const name = document.getElementById('ch-name').value.trim();
-  if (!name) { showToast('El nombre es requerido', 'error'); return; }
-
-  const streamRows = document.querySelectorAll('#streams-list .stream-row');
-  const streams = Array.from(streamRows).map((row, i) => ({
-    id: 's' + Date.now() + i,
-    label: row.querySelector('.stream-label').value.trim(),
-    url: row.querySelector('.stream-url').value.trim(),
-    type: row.querySelector('.stream-type').value,
-    quality: row.querySelector('.stream-quality').value.trim(),
-    headers: {}
-  })).filter(s => s.url);
-
-  const channel = {
-    id: editChannelIndex >= 0 ? (cat.channels[editChannelIndex]?.id || 'ch_' + Date.now()) : 'ch_' + Date.now(),
-    name,
-    logo: document.getElementById('ch-logo').value.trim(),
-    description: document.getElementById('ch-desc').value.trim(),
-    order: editChannelIndex >= 0 ? editChannelIndex : (cat.channels||[]).length,
-    active: true,
-    streams
-  };
-
-  let updatedChannels = [...(cat.channels || [])];
-  if (editChannelIndex >= 0) updatedChannels[editChannelIndex] = channel;
-  else updatedChannels.push(channel);
-
-  try {
-    await fns.updateDoc(fns.doc(db, 'categories', addChannelCatId), { channels: updatedChannels });
-    document.getElementById('modal-add-channel')?.remove();
-    await loadCategories(); renderCategories(); updateSectionCounts();
-    showToast('Contenido guardado ✓', 'success');
-  } catch(e) { showToast('Error: ' + e.message, 'error'); }
-}
-
-async function deleteChannel(catId, channelIndex) {
-  if (!confirm('¿Eliminar este elemento?')) return;
-  const cat = categories.find(c => c.id === catId);
-  if (!cat) return;
-  const updatedChannels = cat.channels.filter((_, i) => i !== channelIndex);
-  await fns.updateDoc(fns.doc(db, 'categories', catId), { channels: updatedChannels });
-  await loadCategories(); renderCategories(); updateSectionCounts();
-  showToast('Eliminado', 'success');
-}
-
-// ─── CONFIG ───────────────────────────────────────────────────
-async function loadConfig() {
-  try {
-    const snap = await fns.getDoc(fns.doc(db, 'config', 'app'));
-    if (!snap.exists()) return;
-    const c = snap.data();
-    document.getElementById('cfg-appName').value = c.appName || '';
-    document.getElementById('cfg-logoUrl').value = c.logoUrl || '';
-    document.getElementById('cfg-splashLogoUrl').value = c.splashLogoUrl || '';
-    document.getElementById('cfg-welcomeMessage').value = c.welcomeMessage || '';
-    document.getElementById('cfg-primaryColor').value = c.primaryColor || '#e50914';
-    document.getElementById('cfg-primaryColorHex').value = c.primaryColor || '#e50914';
-    document.getElementById('cfg-secondaryColor').value = c.secondaryColor || '#141414';
-    document.getElementById('cfg-secondaryColorHex').value = c.secondaryColor || '#141414';
-    document.getElementById('cfg-accentColor').value = c.accentColor || '#ffffff';
-    document.getElementById('cfg-accentColorHex').value = c.accentColor || '#ffffff';
-    document.getElementById('cfg-maxDevicesDefault').value = c.maxDevicesDefault || 1;
-    document.getElementById('cfg-supportContact').value = c.supportContact || '';
-    document.getElementById('cfg-maintenanceMode').checked = c.maintenanceMode || false;
-    document.getElementById('cfg-maintenanceMessage').value = c.maintenanceMessage || '';
-    document.getElementById('cfg-showTv').checked = c.showTv !== false;
-    document.getElementById('cfg-showMovies').checked = c.showMovies !== false;
-    document.getElementById('cfg-showSeries').checked = c.showSeries !== false;
-  } catch(e) {}
-
-  ['primary','secondary','accent'].forEach(k => {
-    document.getElementById(`cfg-${k}Color`).addEventListener('input', e => { document.getElementById(`cfg-${k}ColorHex`).value = e.target.value; });
-    document.getElementById(`cfg-${k}ColorHex`).addEventListener('input', e => { document.getElementById(`cfg-${k}Color`).value = e.target.value; });
-  });
-}
-
-async function saveConfig() {
-  const data = {
-    appName: document.getElementById('cfg-appName').value.trim(),
-    logoUrl: document.getElementById('cfg-logoUrl').value.trim(),
-    splashLogoUrl: document.getElementById('cfg-splashLogoUrl').value.trim(),
-    welcomeMessage: document.getElementById('cfg-welcomeMessage').value.trim(),
-    primaryColor: document.getElementById('cfg-primaryColorHex').value.trim(),
-    secondaryColor: document.getElementById('cfg-secondaryColorHex').value.trim(),
-    accentColor: document.getElementById('cfg-accentColorHex').value.trim(),
-    maxDevicesDefault: parseInt(document.getElementById('cfg-maxDevicesDefault').value) || 1,
-    supportContact: document.getElementById('cfg-supportContact').value.trim(),
-    maintenanceMode: document.getElementById('cfg-maintenanceMode').checked,
-    maintenanceMessage: document.getElementById('cfg-maintenanceMessage').value.trim(),
-    showTv: document.getElementById('cfg-showTv').checked,
-    showMovies: document.getElementById('cfg-showMovies').checked,
-    showSeries: document.getElementById('cfg-showSeries').checked,
-  };
-  try {
-    await fns.setDoc(fns.doc(db, 'config', 'app'), data);
-    showToast('Configuración guardada ✓ · Activo en la app', 'success');
-  } catch(e) { showToast('Error: ' + e.message, 'error'); }
-}
-
-// ─── DASHBOARD ────────────────────────────────────────────────
-function renderDashboard() {
-  const now = new Date();
-  const weekFromNow = new Date(); weekFromNow.setDate(weekFromNow.getDate() + 7);
-  const active = users.filter(u => u.active && !u.blocked && (!u.expiresAt?.seconds || new Date(u.expiresAt.seconds*1000) > now));
-  const expiring = users.filter(u => {
-    if (!u.expiresAt?.seconds) return false;
-    const exp = new Date(u.expiresAt.seconds * 1000);
-    return exp > now && exp < weekFromNow;
-  });
-  const totalChannels = categories.reduce((acc, c) => acc + (c.channels?.length || 0), 0);
-  document.getElementById('stat-users').textContent = users.length;
-  document.getElementById('stat-active').textContent = active.length;
-  document.getElementById('stat-channels').textContent = totalChannels;
-  document.getElementById('stat-expiring').textContent = expiring.length;
-
-  const recent = [...users].sort((a,b) => (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)).slice(0,5);
-  document.getElementById('recent-users-body').innerHTML = recent.length
-    ? recent.map(u => {
-        const exp = u.expiresAt?.seconds ? new Date(u.expiresAt.seconds*1000).toLocaleDateString('es-AR') : '–';
-        const expired = u.expiresAt?.seconds && new Date(u.expiresAt.seconds*1000) < now;
-        return `<tr><td><b>${u.username}</b></td><td><span class="badge badge-info">${u.plan||'mensual'}</span></td><td>${exp}</td><td><span class="badge ${u.blocked?'badge-danger':expired?'badge-warning':'badge-success'}">${u.blocked?'Bloqueado':expired?'Vencido':'Activo'}</span></td></tr>`;
-      }).join('')
-    : '<tr><td colspan="4" class="text-muted text-sm">Sin usuarios aún.</td></tr>';
-}
-
-function updateSectionCounts() {
-  ['tv','movies','series'].forEach(s => {
-    const cats = categories.filter(c => c.section === s);
-    const chs = cats.reduce((acc, c) => acc + (c.channels?.length||0), 0);
-    document.getElementById(`stat-${s}-cats`).textContent = cats.length;
-    document.getElementById(`stat-${s}-ch`).textContent = `${chs} ${s==='tv'?'canales':'títulos'}`;
-    const el = document.getElementById(`sbc-${s}-count`);
-    if (el) el.textContent = `${cats.length} categorías · ${chs} ${s==='tv'?'canales':'títulos'}`;
-  });
-}
-
-// ─── MODALS ───────────────────────────────────────────────────
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
-});
-
-// ─── TOAST ───────────────────────────────────────────────────
-function showToast(msg, type = 'success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = 'toast ' + type + ' show';
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// ─── SHA256 ───────────────────────────────────────────────────
-async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
-</script>
-</body>
-</html>
+      <div><label class="form-label
