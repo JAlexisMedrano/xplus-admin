@@ -41,6 +41,7 @@
   --tv: #3b82f6;
   --movies: #a855f7;
   --series: #f59e0b;
+  --tmdb: #01b4e4;
   --radius: 12px;
   --radius-sm: 8px;
   --font-head: 'Syne', sans-serif;
@@ -55,7 +56,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-hei
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
 code{background:var(--surface3);padding:2px 7px;border-radius:5px;font-size:12px;color:#a78bfa;font-family:monospace}
 
-/* ── SIDEBAR ── */
+/* SIDEBAR */
 .sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto}
 .sidebar-logo{padding:22px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
@@ -74,23 +75,22 @@ code{background:var(--surface3);padding:2px 7px;border-radius:5px;font-size:12px
 .dot-series{background:var(--series)}
 .sidebar-footer{padding:12px 14px;border-top:1px solid var(--border);font-size:10px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{margin-left:var(--sidebar-w);flex:1;padding:28px 32px;min-height:100vh;max-width:calc(100vw - var(--sidebar-w))}
 .page{display:none}
 .page.active{display:block;animation:fadeUp 0.22s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .page-header{margin-bottom:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-.page-header-left{}
 .page-title{font-family:var(--font-head);font-size:24px;font-weight:800;display:flex;align-items:center;gap:10px;line-height:1.1}
 .page-subtitle{color:var(--text2);font-size:13px;margin-top:5px}
 .page-actions{display:flex;gap:8px;flex-shrink:0;align-items:center}
 
-/* ── GRID ── */
+/* GRID */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 
-/* ── STATS ── */
+/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:border-color var(--transition)}
 .stat:hover{border-color:var(--border2)}
@@ -99,13 +99,13 @@ code{background:var(--surface3);padding:2px 7px;border-radius:5px;font-size:12px
 .stat-label{color:var(--text2);font-size:11px;margin-top:5px;text-transform:uppercase;letter-spacing:0.5px}
 .stat-sub{font-size:11px;color:var(--text3);margin-top:3px}
 
-/* ── CARDS ── */
+/* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px}
 .card+.card,.card+.mt-card{margin-top:14px}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .card-title{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.6px}
 
-/* ── FORMS ── */
+/* FORMS */
 .form-group{margin-bottom:14px}
 .form-group:last-child{margin-bottom:0}
 .form-label{display:block;font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
@@ -119,7 +119,7 @@ code{background:var(--surface3);padding:2px 7px;border-radius:5px;font-size:12px
 .input-row{display:flex;gap:8px;align-items:flex-start}
 .input-row .form-group{flex:1}
 
-/* ── BUTTONS ── */
+/* BUTTONS */
 .btn{padding:8px 16px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-family:var(--font-body);font-size:13px;font-weight:600;transition:all var(--transition);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;line-height:1}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-primary:hover{background:#c0080f;transform:translateY(-1px)}
@@ -129,17 +129,13 @@ code{background:var(--surface3);padding:2px 7px;border-radius:5px;font-size:12px
 .btn-danger:hover{background:var(--danger);color:#fff}
 .btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
 .btn-ghost:hover{color:var(--text);border-color:var(--border2);background:var(--surface2)}
-.btn-tv{background:rgba(59,130,246,0.1);color:var(--tv);border:1px solid rgba(59,130,246,0.2)}
-.btn-tv:hover{background:var(--tv);color:#fff}
-.btn-movies{background:rgba(168,85,247,0.1);color:var(--movies);border:1px solid rgba(168,85,247,0.2)}
-.btn-movies:hover{background:var(--movies);color:#fff}
-.btn-series{background:rgba(245,158,11,0.1);color:var(--series);border:1px solid rgba(245,158,11,0.2)}
-.btn-series:hover{background:var(--series);color:#fff}
+.btn-tmdb{background:rgba(1,180,228,0.1);color:var(--tmdb);border:1px solid rgba(1,180,228,0.3)}
+.btn-tmdb:hover{background:var(--tmdb);color:#000}
 .btn-sm{padding:5px 10px;font-size:11px;border-radius:6px;gap:4px}
 .btn-xs{padding:3px 7px;font-size:10px;border-radius:5px;gap:3px}
 .btn:disabled{opacity:0.4;cursor:not-allowed;transform:none!important}
 
-/* ── TABLE ── */
+/* TABLE */
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;padding:9px 12px;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.7px;border-bottom:1px solid var(--border)}
@@ -148,7 +144,7 @@ tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(255,255,255,0.015)}
 .avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
 
-/* ── BADGES ── */
+/* BADGES */
 .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px}
 .badge-success{background:rgba(34,197,94,0.1);color:var(--success)}
 .badge-danger{background:rgba(239,68,68,0.1);color:var(--danger)}
@@ -158,8 +154,9 @@ tr:hover td{background:rgba(255,255,255,0.015)}
 .badge-movies{background:rgba(168,85,247,0.1);color:var(--movies)}
 .badge-series{background:rgba(245,158,11,0.1);color:var(--series)}
 .badge-neutral{background:var(--surface3);color:var(--text2)}
+.badge-tmdb{background:rgba(1,180,228,0.15);color:var(--tmdb)}
 
-/* ── TOGGLE ── */
+/* TOGGLE */
 .toggle{position:relative;width:38px;height:21px;flex-shrink:0}
 .toggle input{opacity:0;width:0;height:0;position:absolute}
 .toggle-slider{position:absolute;inset:0;background:var(--border);border-radius:21px;cursor:pointer;transition:0.22s}
@@ -167,12 +164,12 @@ tr:hover td{background:rgba(255,255,255,0.015)}
 input:checked+.toggle-slider{background:var(--accent)}
 input:checked+.toggle-slider:before{transform:translateX(17px)}
 
-/* ── MODAL ── */
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:1000;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;animation:slideUp 0.22s ease;position:relative}
 .modal-lg{max-width:720px}
-.modal-xl{max-width:860px}
+.modal-xl{max-width:880px}
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
 .modal-title{font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
 .modal-close{position:absolute;top:18px;right:18px;background:none;border:none;color:var(--text2);cursor:pointer;font-size:18px;padding:4px;border-radius:6px;line-height:1}
@@ -181,7 +178,7 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 .modal-section{margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
 .modal-section-title{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px}
 
-/* ── TOAST ── */
+/* TOAST */
 .toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:11px 16px;font-size:13px;transform:translateX(120%);opacity:0;transition:all 0.28s cubic-bezier(0.4,0,0.2,1);max-width:300px;display:flex;align-items:center;gap:8px;pointer-events:auto}
 .toast.show{transform:translateX(0);opacity:1}
@@ -189,19 +186,11 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 .toast.error{border-color:rgba(239,68,68,0.4);color:var(--danger)}
 .toast.info{border-color:rgba(99,102,241,0.4);color:#818cf8}
 
-/* ── COLOR INPUT ── */
+/* COLOR INPUT */
 .color-wrap{display:flex;gap:8px;align-items:center}
 .color-wrap input[type=color]{width:36px;height:36px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;background:none;padding:2px;flex-shrink:0}
 
-/* ── SECTION TABS ── */
-.section-tabs{display:flex;gap:6px;margin-bottom:20px}
-.section-tab{display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;transition:all var(--transition)}
-.section-tab:hover{border-color:var(--border2);color:var(--text)}
-.section-tab.active-tv{border-color:var(--tv);color:var(--tv);background:rgba(59,130,246,0.07)}
-.section-tab.active-movies{border-color:var(--movies);color:var(--movies);background:rgba(168,85,247,0.07)}
-.section-tab.active-series{border-color:var(--series);color:var(--series);background:rgba(245,158,11,0.07)}
-
-/* ── CAT CARD ── */
+/* CAT CARD */
 .cat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color var(--transition)}
 .cat-card:hover{border-color:var(--border2)}
 .cat-card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;gap:12px}
@@ -216,7 +205,7 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 .cat-card-body.open{display:block}
 .cat-card-body-inner{padding:4px 0 10px}
 
-/* ── CHANNEL ITEM ── */
+/* CHANNEL ITEM */
 .ch-item{display:flex;align-items:center;gap:10px;padding:9px 18px;border-bottom:1px solid rgba(255,255,255,0.03);transition:background var(--transition)}
 .ch-item:last-child{border-bottom:none}
 .ch-item:hover{background:rgba(255,255,255,0.02)}
@@ -229,13 +218,13 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 .ch-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
 .ch-actions{display:flex;gap:5px;flex-shrink:0}
 
-/* ── STREAM ROW ── */
+/* STREAM ROW */
 .stream-row{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 12px 10px;margin-bottom:8px;position:relative}
 .stream-row:last-child{margin-bottom:0}
 .stream-remove{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:2px 5px;border-radius:4px;line-height:1}
 .stream-remove:hover{color:var(--danger);background:rgba(239,68,68,0.1)}
 
-/* ── SEASON ROW ── */
+/* SEASON ROW */
 .season-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:10px;overflow:hidden}
 .season-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;background:var(--surface3)}
 .season-header:hover{background:rgba(255,255,255,0.03)}
@@ -246,7 +235,7 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 .ep-remove{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:2px 5px;border-radius:4px;line-height:1}
 .ep-remove:hover{color:var(--danger);background:rgba(239,68,68,0.1)}
 
-/* ── SECTIONS PAGE ── */
+/* SECTIONS PAGE */
 .sections-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
 .section-big-card{border-radius:14px;padding:26px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.15s,border-color 0.15s;border:2px solid transparent}
 .section-big-card:hover{transform:translateY(-2px)}
@@ -257,7 +246,7 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 .sbc-name{font-family:var(--font-head);font-size:18px;font-weight:800}
 .sbc-count{font-size:12px;opacity:0.65;margin-top:3px}
 
-/* ── BANNERS ── */
+/* BANNERS */
 .banner-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0;overflow:hidden;margin-bottom:10px;display:flex;transition:border-color var(--transition)}
 .banner-card:hover{border-color:var(--border2)}
 .banner-img{width:160px;height:88px;object-fit:cover;background:var(--surface2);flex-shrink:0}
@@ -267,34 +256,50 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 .banner-meta{font-size:11px;color:var(--text3);margin-top:6px}
 .banner-actions{display:flex;align-items:center;gap:8px;padding:14px 14px 14px 0;flex-shrink:0}
 
-/* ── MISC UTILS ── */
+/* TMDB INTEGRATION */
+.tmdb-search-wrap{background:var(--surface2);border:1.5px solid rgba(1,180,228,0.25);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px}
+.tmdb-search-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.tmdb-badge{background:linear-gradient(135deg,#0d253f,#032541);color:#01b4e4;font-size:10px;font-weight:800;padding:3px 9px;border-radius:5px;letter-spacing:0.8px;border:1px solid rgba(1,180,228,0.4);flex-shrink:0}
+.tmdb-input-row{display:flex;gap:8px}
+.tmdb-results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:12px;max-height:300px;overflow-y:auto;padding-right:2px}
+.tmdb-card{background:var(--surface3);border:1.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:border-color 0.15s,transform 0.15s;position:relative}
+.tmdb-card:hover{border-color:var(--tmdb);transform:translateY(-2px)}
+.tmdb-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:var(--surface2)}
+.tmdb-no-poster{width:100%;aspect-ratio:2/3;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:26px}
+.tmdb-card-info{padding:6px 7px 7px}
+.tmdb-card-title{font-size:11px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.tmdb-card-year{font-size:10px;color:var(--text2);margin-top:1px}
+.tmdb-rating{position:absolute;top:5px;right:5px;background:rgba(0,0,0,0.8);color:var(--warning);font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px}
+.tmdb-loading{text-align:center;padding:24px;color:var(--text2);font-size:12px}
+.tmdb-divider{display:flex;align-items:center;gap:10px;margin:16px 0 14px}
+.tmdb-divider::before,.tmdb-divider::after{content:'';flex:1;border-top:1px solid var(--border)}
+.tmdb-divider span{font-size:11px;color:var(--text3);white-space:nowrap}
+.tmdb-selected{display:flex;align-items:center;gap:10px;background:rgba(1,180,228,0.06);border:1px solid rgba(1,180,228,0.2);border-radius:var(--radius-sm);padding:9px 11px;margin-top:10px}
+.tmdb-selected img{width:34px;height:50px;object-fit:cover;border-radius:4px;flex-shrink:0}
+.tmdb-selected-name{font-size:12px;font-weight:700}
+.tmdb-selected-sub{font-size:11px;color:var(--text2);margin-top:2px}
+.tmdb-hint-no-key{font-size:11px;color:var(--warning);margin-left:auto}
+
+/* MISC UTILS */
 .flex{display:flex}
 .flex-col{flex-direction:column}
 .items-center{align-items:center}
-.items-start{align-items:flex-start}
 .justify-between{justify-content:space-between}
 .justify-end{justify-content:flex-end}
 .gap-4{gap:4px}.gap-6{gap:6px}.gap-8{gap:8px}.gap-10{gap:10px}.gap-12{gap:12px}.gap-16{gap:16px}
-.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}.mt-24{margin-top:24px}
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}
 .mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}
 .fw-7{font-weight:700}.fw-6{font-weight:600}
 .text-sm{font-size:12px}.text-xs{font-size:11px}.text-muted{color:var(--text2)}.text-dim{color:var(--text3)}
-.span-2{grid-column:span 2}
 .w-full{width:100%}
 .empty-state{text-align:center;padding:48px 20px}
 .empty-icon{font-size:36px;margin-bottom:10px}
 .empty-state p{color:var(--text2);font-size:13px;line-height:1.6}
 .divider{border:none;border-top:1px solid var(--border);margin:16px 0}
-.section-indicator{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
-.si-tv{background:rgba(59,130,246,0.1);color:var(--tv)}
-.si-movies{background:rgba(168,85,247,0.1);color:var(--movies)}
-.si-series{background:rgba(245,158,11,0.1);color:var(--series)}
 
-/* preview image */
 .img-preview{width:100%;height:110px;object-fit:cover;border-radius:var(--radius-sm);background:var(--surface3);display:none;margin-top:8px}
 .img-preview.visible{display:block}
 
-/* loading overlay */
 .loading-overlay{position:fixed;inset:0;background:rgba(10,10,15,0.85);z-index:2000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
 .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -302,14 +307,11 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
 </style>
 </head>
 <body>
-
-<!-- LOADING -->
 <div class="loading-overlay" id="loading-overlay">
   <div class="spinner"></div>
   <div style="font-size:13px;color:var(--text2)">Conectando con Firebase…</div>
 </div>
 
-<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-logo">
     <div class="logo-icon">📺</div>
@@ -323,33 +325,20 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
     <div class="nav-section-label" style="margin-top:6px">Contenido</div>
     <button class="nav-item" data-page="sections" onclick="navigate('sections',this)"><span class="icon">🗂️</span>Vista general</button>
     <div class="nav-section-label" style="margin-top:6px">Por sección</div>
-    <button class="nav-item" data-nav-content="tv" onclick="navigateContent('tv',this)">
-      <span class="section-dot dot-tv"></span>TV en Vivo
-    </button>
-    <button class="nav-item" data-nav-content="movies" onclick="navigateContent('movies',this)">
-      <span class="section-dot dot-movies"></span>Películas
-    </button>
-    <button class="nav-item" data-nav-content="series" onclick="navigateContent('series',this)">
-      <span class="section-dot dot-series"></span>Series
-    </button>
+    <button class="nav-item" data-nav-content="tv" onclick="navigateContent('tv',this)"><span class="section-dot dot-tv"></span>TV en Vivo</button>
+    <button class="nav-item" data-nav-content="movies" onclick="navigateContent('movies',this)"><span class="section-dot dot-movies"></span>Películas</button>
+    <button class="nav-item" data-nav-content="series" onclick="navigateContent('series',this)"><span class="section-dot dot-series"></span>Series</button>
     <div class="nav-section-label" style="margin-top:6px">Banners</div>
-    <button class="nav-item" data-nav-banner="tv" onclick="navigateBanners('tv',this)">
-      <span class="section-dot dot-tv"></span>Banners TV
-    </button>
-    <button class="nav-item" data-nav-banner="movies" onclick="navigateBanners('movies',this)">
-      <span class="section-dot dot-movies"></span>Banners Películas
-    </button>
-    <button class="nav-item" data-nav-banner="series" onclick="navigateBanners('series',this)">
-      <span class="section-dot dot-series"></span>Banners Series
-    </button>
+    <button class="nav-item" data-nav-banner="tv" onclick="navigateBanners('tv',this)"><span class="section-dot dot-tv"></span>Banners TV</button>
+    <button class="nav-item" data-nav-banner="movies" onclick="navigateBanners('movies',this)"><span class="section-dot dot-movies"></span>Banners Películas</button>
+    <button class="nav-item" data-nav-banner="series" onclick="navigateBanners('series',this)"><span class="section-dot dot-series"></span>Banners Series</button>
   </nav>
   <div class="sidebar-footer">
-    <span>XplusTV v4.0</span>
+    <span>XplusTV v4.1 · TMDB</span>
     <span id="db-status" style="color:var(--text3)">⬤ offline</span>
   </div>
 </aside>
 
-<!-- MAIN -->
 <main class="main">
 
   <!-- DASHBOARD -->
@@ -401,18 +390,15 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
     <div class="page-header"><div class="page-header-left"><h1 class="page-title">🗂️ Secciones</h1><p class="page-subtitle">Estructura de contenido de la app</p></div></div>
     <div class="sections-grid">
       <div class="section-big-card sbc-tv" onclick="navigateContent('tv')">
-        <div class="sbc-icon">📺</div>
-        <div class="sbc-name">TV en Vivo</div>
+        <div class="sbc-icon">📺</div><div class="sbc-name">TV en Vivo</div>
         <div class="sbc-count" id="sbc-tv-count">– categorías · – canales</div>
       </div>
       <div class="section-big-card sbc-movies" onclick="navigateContent('movies')">
-        <div class="sbc-icon">🎬</div>
-        <div class="sbc-name">Películas</div>
+        <div class="sbc-icon">🎬</div><div class="sbc-name">Películas</div>
         <div class="sbc-count" id="sbc-movies-count">– categorías · – títulos</div>
       </div>
       <div class="section-big-card sbc-series" onclick="navigateContent('series')">
-        <div class="sbc-icon">🎭</div>
-        <div class="sbc-name">Series</div>
+        <div class="sbc-icon">🎭</div><div class="sbc-name">Series</div>
         <div class="sbc-count" id="sbc-series-count">– categorías · – series</div>
       </div>
     </div>
@@ -420,10 +406,10 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
       <div class="card-header"><div class="card-title">Estructura en Firestore</div></div>
       <p class="text-muted text-sm" style="line-height:2">
         Colección <code>categories</code> → campo <code>section</code>: <code>tv</code> | <code>movies</code> | <code>series</code><br>
-        TV: array <code>channels[].streams[]</code> → reproductor directo<br>
-        Películas: array <code>channels[].streams[]</code> + campos <code>backdropUrl</code>, <code>year</code>, <code>rating</code> → pantalla de detalle<br>
-        Series: array <code>channels[].seasons[].episodes[].streams[]</code> → selector de temporadas/episodios<br>
-        Banners: colección <code>banners</code> → campo <code>section</code> para filtrar por sección
+        TV: array <code>channels[].streams[]</code><br>
+        Películas: array <code>channels[].streams[]</code> + <code>backdropUrl</code>, <code>year</code>, <code>rating</code>, <code>genres</code>, <code>tmdbId</code><br>
+        Series: array <code>channels[].seasons[].episodes[].streams[]</code><br>
+        Banners: colección <code>banners</code> → campo <code>section</code>
       </p>
     </div>
   </div>
@@ -491,14 +477,21 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
           <div class="card-header"><div class="card-title">Identidad</div></div>
           <div class="form-group"><label class="form-label">Nombre de la app</label><input class="form-input" id="cfg-appName" placeholder="XplusTV"></div>
           <div class="form-group"><label class="form-label">URL del Logo</label><input class="form-input" id="cfg-logoUrl" placeholder="https://…/logo.png" oninput="previewImg('cfg-logoUrl','prev-logo')">
-            <img id="prev-logo" class="img-preview" alt="preview logo">
-          </div>
+            <img id="prev-logo" class="img-preview" alt="preview logo"></div>
           <div class="form-group"><label class="form-label">URL Logo Splash</label><input class="form-input" id="cfg-splashLogoUrl" placeholder="https://…/splash.png" oninput="previewImg('cfg-splashLogoUrl','prev-splash')">
-            <img id="prev-splash" class="img-preview" alt="preview splash">
-          </div>
+            <img id="prev-splash" class="img-preview" alt="preview splash"></div>
           <div class="form-group"><label class="form-label">Mensaje de bienvenida</label><input class="form-input" id="cfg-welcomeMessage" placeholder="Bienvenido a XplusTV"></div>
           <div class="form-group"><label class="form-label">Contacto de soporte</label><input class="form-input" id="cfg-supportContact" placeholder="WhatsApp o email…"></div>
           <div class="form-group"><label class="form-label">Dispositivos máx. por defecto</label><input class="form-input" type="number" id="cfg-maxDevicesDefault" value="1" min="1" max="10"></div>
+        </div>
+        <div class="card mt-16">
+          <div class="card-header"><div class="card-title">TMDB</div></div>
+          <div class="form-group">
+            <label class="form-label">API Key de TMDB <small><a href="https://www.themoviedb.org/settings/api" target="_blank" style="color:var(--tmdb)">Obtener gratis ↗</a></small></label>
+            <input class="form-input" id="cfg-tmdbKey" placeholder="Pegá tu API key aquí…" type="password">
+            <div class="form-hint">Se usa solo en este panel para buscar información de películas y series. No se guarda en Firebase.</div>
+          </div>
+          <button class="btn btn-tmdb btn-sm" onclick="testTmdbKey()">🔍 Probar conexión</button>
         </div>
         <div class="card mt-16">
           <div class="card-header"><div class="card-title">Mantenimiento</div></div>
@@ -511,29 +504,20 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
       </div>
       <div>
         <div class="card">
-          <div class="card-header"><div class="card-title">Colores <span class="badge badge-neutral" style="margin-left:6px">Hexadecimal completo</span></div></div>
+          <div class="card-header"><div class="card-title">Colores</div></div>
           <div class="form-group">
             <label class="form-label">Color primario <small>Botones, íconos activos</small></label>
-            <div class="color-wrap">
-              <input type="color" id="cfg-primaryColor" value="#e50914">
-              <input class="form-input" id="cfg-primaryColorHex" value="#e50914" placeholder="#E50914">
-            </div>
+            <div class="color-wrap"><input type="color" id="cfg-primaryColor" value="#e50914"><input class="form-input" id="cfg-primaryColorHex" value="#e50914" placeholder="#E50914"></div>
           </div>
           <div class="form-group">
             <label class="form-label">Color de fondo <small>Fondo principal de la app</small></label>
-            <div class="color-wrap">
-              <input type="color" id="cfg-secondaryColor" value="#0d0d12">
-              <input class="form-input" id="cfg-secondaryColorHex" value="#0d0d12" placeholder="#0D0D12">
-            </div>
+            <div class="color-wrap"><input type="color" id="cfg-secondaryColor" value="#0d0d12"><input class="form-input" id="cfg-secondaryColorHex" value="#0d0d12" placeholder="#0D0D12"></div>
           </div>
           <div class="form-group">
             <label class="form-label">Color acento <small>Texto sobre fondos oscuros</small></label>
-            <div class="color-wrap">
-              <input type="color" id="cfg-accentColor" value="#ffffff">
-              <input class="form-input" id="cfg-accentColorHex" value="#ffffff" placeholder="#FFFFFF">
-            </div>
+            <div class="color-wrap"><input type="color" id="cfg-accentColor" value="#ffffff"><input class="form-input" id="cfg-accentColorHex" value="#ffffff" placeholder="#FFFFFF"></div>
           </div>
-          <div class="form-hint">Usá siempre formato hexadecimal completo (#RRGGBB). Si dejás vacío, la app usa los colores por defecto.</div>
+          <div class="form-hint">Usá siempre formato hexadecimal completo (#RRGGBB).</div>
         </div>
         <div class="card mt-16">
           <div class="card-header"><div class="card-title">Secciones visibles en la app</div></div>
@@ -555,10 +539,8 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
       </div>
     </div>
   </div>
-
 </main>
-
-<!-- ═══════════════════ MODAL USUARIO ═══════════════════ -->
+<!-- MODAL USUARIO -->
 <div class="modal-overlay" id="modal-user">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-user')">✕</button>
@@ -593,7 +575,7 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
   </div>
 </div>
 
-<!-- ═══════════════════ MODAL BANNER ═══════════════════ -->
+<!-- MODAL BANNER -->
 <div class="modal-overlay" id="modal-banner">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-banner')">✕</button>
@@ -623,7 +605,7 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
   </div>
 </div>
 
-<!-- ═══════════════════ MODAL CATEGORÍA ═══════════════════ -->
+<!-- MODAL CATEGORÍA -->
 <div class="modal-overlay" id="modal-category">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-category')">✕</button>
@@ -646,30 +628,61 @@ input:checked+.toggle-slider:before{transform:translateX(17px)}
   </div>
 </div>
 
-<!-- ═══════════════════ TOAST CONTAINER ═══════════════════ -->
 <div class="toast-container" id="toast-container"></div>
-
-<!-- ═══════════════════ SCRIPT ═══════════════════ -->
 <script>
-// ─── ESTADO GLOBAL ──────────────────────────────────────────────
+// ─── TMDB CONFIG ─────────────────────────────────────────────────
+// La API key se lee desde el campo en Diseño App o desde localStorage
+const TMDB_IMG = 'https://image.tmdb.org/t/p/';
+
+function getTmdbKey() {
+  const fieldKey = document.getElementById('cfg-tmdbKey')?.value?.trim();
+  if (fieldKey) return fieldKey;
+  return localStorage.getItem('xplustv_tmdb_key') || '';
+}
+
+function saveTmdbKeyLocally(key) {
+  if (key) localStorage.setItem('xplustv_tmdb_key', key);
+}
+
+async function testTmdbKey() {
+  const key = getTmdbKey();
+  if (!key) { showToast('Ingresá tu API key primero', 'error'); return; }
+  try {
+    const r = await fetch(`https://api.themoviedb.org/3/configuration?api_key=${key}`);
+    if (r.ok) {
+      saveTmdbKeyLocally(key);
+      showToast('✓ TMDB conectado correctamente', 'success');
+    } else {
+      showToast('API key inválida (código ' + r.status + ')', 'error');
+    }
+  } catch(e) { showToast('Error de conexión con TMDB', 'error'); }
+}
+
+// ─── ESTADO GLOBAL ───────────────────────────────────────────────
 let db, fns;
 let users = [], categories = [], banners = [];
 let currentSection = 'tv';
 let currentBannerSection = 'tv';
 
 const SECTIONS = {
-  tv:     { label:'TV en Vivo',  icon:'📺', word:'canales',  colorVar:'--tv',     badgeCls:'badge-tv'    },
-  movies: { label:'Películas',   icon:'🎬', word:'títulos',  colorVar:'--movies', badgeCls:'badge-movies'},
-  series: { label:'Series',      icon:'🎭', word:'series',   colorVar:'--series', badgeCls:'badge-series'},
+  tv:     { label:'TV en Vivo',  icon:'📺', word:'canales',  colorVar:'--tv'    },
+  movies: { label:'Películas',   icon:'🎬', word:'títulos',  colorVar:'--movies'},
+  series: { label:'Series',      icon:'🎭', word:'series',   colorVar:'--series'},
 };
 
-// ─── INIT ──────────────────────────────────────────────────────
+// ─── INIT ─────────────────────────────────────────────────────────
 window.addEventListener('firebase-ready', async () => {
   db = window._db; fns = window._fns;
   document.getElementById('db-status').textContent = '⬤ online';
   document.getElementById('db-status').style.color = 'var(--success)';
   await loadAll();
   document.getElementById('loading-overlay').classList.add('hidden');
+  // Restaurar TMDB key guardada
+  const savedKey = localStorage.getItem('xplustv_tmdb_key');
+  if (savedKey) {
+    const el = document.getElementById('cfg-tmdbKey');
+    if (el) el.value = savedKey;
+  }
 });
 
 async function loadAll() {
@@ -678,7 +691,7 @@ async function loadAll() {
   updateSectionCounts();
 }
 
-// ─── NAVEGACIÓN ─────────────────────────────────────────────────
+// ─── NAVEGACIÓN ───────────────────────────────────────────────────
 function navigate(page, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -698,7 +711,7 @@ function navigateContent(section, btn) {
   document.getElementById('content-page-title').innerHTML = `${s.icon} ${s.label}`;
   document.getElementById('content-page-subtitle').textContent =
     section === 'series' ? 'Series con temporadas y episodios' :
-    section === 'movies' ? 'Películas con detalle, poster y fondo' :
+    section === 'movies' ? 'Películas con detalle, poster y fondo — búsqueda TMDB integrada' :
     'Canales en vivo con múltiples señales';
   renderCategories();
 }
@@ -716,7 +729,7 @@ function navigateBanners(section, btn) {
   renderBanners();
 }
 
-// ─── USUARIOS ───────────────────────────────────────────────────
+// ─── USUARIOS ─────────────────────────────────────────────────────
 async function loadUsers() {
   try {
     const snap = await fns.getDocs(fns.collection(db, 'users'));
@@ -822,12 +835,11 @@ async function deleteUser(id) {
   if (!confirm('¿Eliminar este usuario permanentemente?')) return;
   try {
     await fns.deleteDoc(fns.doc(db, 'users', id));
-    await loadUsers(); renderDashboard();
-    showToast('Usuario eliminado', 'info');
+    await loadUsers(); renderDashboard(); showToast('Usuario eliminado', 'info');
   } catch(e) { showToast('Error: ' + e.message, 'error'); }
 }
 
-// ─── BANNERS ────────────────────────────────────────────────────
+// ─── BANNERS ──────────────────────────────────────────────────────
 async function loadBanners() {
   try {
     const snap = await fns.getDocs(fns.query(fns.collection(db, 'banners'), fns.orderBy('order')));
@@ -907,7 +919,7 @@ async function deleteBanner(id) {
   } catch(e) { showToast('Error: ' + e.message, 'error'); }
 }
 
-// ─── CATEGORÍAS ─────────────────────────────────────────────────
+// ─── CATEGORÍAS ───────────────────────────────────────────────────
 async function loadCategories() {
   try {
     const snap = await fns.getDocs(fns.query(fns.collection(db, 'categories'), fns.orderBy('order')));
@@ -960,7 +972,6 @@ function buildChannelItem(cat, ch, ci, isSeries) {
   const logoHtml = hasLogo
     ? `<img src="${ch.logo}" class="ch-logo" onerror="this.parentElement.innerHTML='<div class=ch-logo-placeholder>${initial}</div>'">`
     : `<div class="ch-logo-placeholder">${initial}</div>`;
-  
   let metaText = '';
   let tagsHtml = '';
   if (isSeries) {
@@ -973,9 +984,8 @@ function buildChannelItem(cat, ch, ci, isSeries) {
     if (ch.year) metaText += ` · ${ch.year}`;
     if (ch.rating) tagsHtml += `<span class="badge badge-neutral" style="font-size:9px">⭐ ${ch.rating}</span>`;
     if (ch.backdropUrl) tagsHtml += `<span class="badge badge-info" style="font-size:9px">Fondo ✓</span>`;
+    if (ch.tmdbId) tagsHtml += `<span class="badge badge-tmdb" style="font-size:9px">TMDB</span>`;
   }
-  if (ch.description) metaText += ` · ${ch.description.slice(0,60)}${ch.description.length>60?'…':''}`;
-
   return `<div class="ch-item">
     <div class="ch-logo-wrap">${logoHtml}</div>
     <div class="ch-info">
@@ -990,13 +1000,8 @@ function buildChannelItem(cat, ch, ci, isSeries) {
   </div>`;
 }
 
-function toggleCatBody(catId) {
-  document.getElementById('cat-body-'+catId)?.classList.toggle('open');
-}
-function editCategoryBtn(catId) {
-  const cat = categories.find(c => c.id === catId);
-  if (cat) editCategory(cat);
-}
+function toggleCatBody(catId) { document.getElementById('cat-body-'+catId)?.classList.toggle('open'); }
+function editCategoryBtn(catId) { const cat = categories.find(c => c.id === catId); if (cat) editCategory(cat); }
 
 function openCategoryModal(c = null) {
   document.getElementById('modal-cat-title').textContent = c ? '✏️ Editar categoría' : '📂 Nueva categoría';
@@ -1037,8 +1042,9 @@ async function deleteCategory(id) {
     showToast('Categoría eliminada', 'info');
   } catch(e) { showToast('Error: ' + e.message, 'error'); }
 }
-
-// ─── MODAL CONTENIDO (TV, PELÍCULAS, SERIES) ─────────────────────
+</script>
+<script>
+// ─── MODAL CONTENIDO CON TMDB ─────────────────────────────────────
 let addChannelCatId = '';
 let editChannelIndex = -1;
 
@@ -1053,18 +1059,41 @@ function buildChannelModal(ch) {
   document.getElementById('modal-channel-dyn')?.remove();
   const isSeries = currentSection === 'series';
   const isMovies = currentSection === 'movies';
+  const tmdbType = isSeries ? 'tv' : 'movie';
+
+  // Bloque TMDB solo para películas y series
+  const tmdbBlock = (isMovies || isSeries) ? `
+    <div class="tmdb-search-wrap">
+      <div class="tmdb-search-header">
+        <div class="tmdb-badge">TMDB</div>
+        <span style="font-size:12px;color:var(--text2)">Buscá para autocompletar todos los campos</span>
+        <span class="tmdb-hint-no-key" id="tmdb-key-hint" style="display:none">⚠️ Sin API key — configurala en Diseño App</span>
+      </div>
+      <div class="tmdb-input-row">
+        <input class="form-input" id="tmdb-query" placeholder="Escribí el título para buscar en TMDB…" style="flex:1">
+        <button class="btn btn-tmdb btn-sm" onclick="runTmdbSearch('${tmdbType}')">🔍 Buscar</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearTmdbResults()" title="Limpiar búsqueda">✕</button>
+      </div>
+      <div id="tmdb-results"></div>
+      <div id="tmdb-selected-wrap"></div>
+    </div>` : '';
+
+  const divider = (isMovies || isSeries)
+    ? `<div class="tmdb-divider"><span>— o completá los campos manualmente —</span></div>` : '';
 
   const extraFields = (isMovies || isSeries) ? `
-    <div class="form-group"><label class="form-label">URL Backdrop / Fondo <small>imagen horizontal ancha</small></label>
+    <div class="form-group">
+      <label class="form-label">URL Backdrop / Fondo <small>imagen horizontal ancha</small></label>
       <input class="form-input" id="ch-backdrop" placeholder="https://…/backdrop.jpg" value="${ch?.backdropUrl||''}" oninput="previewImg('ch-backdrop','ch-backdrop-prev')">
-      <img id="ch-backdrop-prev" class="img-preview ${ch?.backdropUrl ? 'visible':''}" src="${ch?.backdropUrl||''}" alt="">
+      <img id="ch-backdrop-prev" class="img-preview ${ch?.backdropUrl?'visible':''}" src="${ch?.backdropUrl||''}" alt="">
     </div>
     <div class="grid-2">
       <div class="form-group"><label class="form-label">Año</label><input class="form-input" id="ch-year" placeholder="2024" value="${ch?.year||''}"></div>
       <div class="form-group"><label class="form-label">Rating <small>ej: 8.5</small></label><input class="form-input" id="ch-rating" placeholder="8.5" value="${ch?.rating||''}"></div>
+      <div class="form-group"><label class="form-label">Géneros</label><input class="form-input" id="ch-genres" placeholder="Acción, Drama" value="${ch?.genres||''}"></div>
+      <div class="form-group"><label class="form-label">ID TMDB <small>referencia</small></label><input class="form-input" id="ch-tmdb-id" placeholder="auto" value="${ch?.tmdbId||''}" readonly style="opacity:0.5;cursor:default"></div>
     </div>` : '';
 
-  // Streams section (TV y Películas)
   const streamsSection = !isSeries ? `
     <div class="modal-section">
       <div class="modal-section-title">Señales / Streams</div>
@@ -1072,7 +1101,6 @@ function buildChannelModal(ch) {
       <button class="btn btn-ghost btn-sm mt-8" onclick="addStreamRow()">+ Agregar señal</button>
     </div>` : '';
 
-  // Seasons section (Solo series)
   const seasonsSection = isSeries ? `
     <div class="modal-section">
       <div class="flex items-center justify-between mb-12">
@@ -1089,6 +1117,8 @@ function buildChannelModal(ch) {
     <div class="modal modal-xl">
       <button class="modal-close" onclick="document.getElementById('modal-channel-dyn').remove()">✕</button>
       <h2 class="modal-title">${ch ? '✏️ Editar' : '➕ Agregar'} ${isSeries?'serie':isMovies?'película':'canal'}</h2>
+      ${tmdbBlock}
+      ${divider}
       <div class="grid-2">
         <div class="form-group"><label class="form-label">Nombre *</label><input class="form-input" id="ch-name" placeholder="${isSeries?'Breaking Bad':isMovies?'Inception':'ESPN'}" value="${ch?.name||''}"></div>
         <div class="form-group">
@@ -1113,23 +1143,150 @@ function buildChannelModal(ch) {
   document.body.appendChild(modal);
   modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
 
-  // Populate streams (TV/Movies)
+  // Enter en buscador TMDB
+  modal.querySelector('#tmdb-query')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') runTmdbSearch(tmdbType);
+  });
+
+  // Mostrar hint si no hay API key
+  if ((isMovies || isSeries) && !getTmdbKey()) {
+    document.getElementById('tmdb-key-hint')?.style.setProperty('display', 'inline');
+  }
+
   if (!isSeries) {
     if (ch?.streams?.length) ch.streams.forEach(s => addStreamRow(s));
     else addStreamRow();
   }
-
-  // Populate seasons (Series)
   if (isSeries) {
-    if (ch?.seasons?.length) {
-      ch.seasons.forEach((s, si) => addSeasonBlock(s, si));
-    } else {
-      addSeasonBlock();
-    }
+    if (ch?.seasons?.length) ch.seasons.forEach((s, si) => addSeasonBlock(s, si));
+    else addSeasonBlock();
   }
 }
 
-// ─── STREAMS ─────────────────────────────────────────────────────
+// ─── TMDB BÚSQUEDA ────────────────────────────────────────────────
+async function runTmdbSearch(type) {
+  const key = getTmdbKey();
+  if (!key) {
+    showToast('Configurá tu API key de TMDB en Diseño App', 'error');
+    return;
+  }
+  const query = document.getElementById('tmdb-query')?.value.trim();
+  if (!query || query.length < 2) { showToast('Escribí al menos 2 caracteres', 'info'); return; }
+
+  const resultsEl = document.getElementById('tmdb-results');
+  if (!resultsEl) return;
+  resultsEl.innerHTML = `<div class="tmdb-loading">🔍 Buscando <b>${query}</b> en TMDB…</div>`;
+
+  try {
+    const url = `https://api.themoviedb.org/3/search/${type}?api_key=${key}&query=${encodeURIComponent(query)}&language=es-AR&include_adult=false`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status + ' — verificá tu API key');
+    const data = await res.json();
+    const results = (data.results || []).slice(0, 12);
+    if (!results.length) {
+      resultsEl.innerHTML = `<div class="tmdb-loading">Sin resultados para "<b>${query}</b>". Probá con otro título.</div>`;
+      return;
+    }
+    resultsEl.innerHTML = `<div class="tmdb-results-grid">${results.map(r => buildTmdbCard(r, type)).join('')}</div>`;
+  } catch(e) {
+    resultsEl.innerHTML = `<div class="tmdb-loading" style="color:var(--danger)">❌ ${e.message}</div>`;
+  }
+}
+
+function buildTmdbCard(r, type) {
+  const title = (r.title || r.name || '–').replace(/"/g, '&quot;');
+  const year = (r.release_date || r.first_air_date || '').slice(0, 4);
+  const rating = r.vote_average ? r.vote_average.toFixed(1) : '';
+  const posterUrl = r.poster_path ? TMDB_IMG + 'w185' + r.poster_path : '';
+  const imgHtml = posterUrl
+    ? `<img src="${posterUrl}" alt="${title}" loading="lazy">`
+    : `<div class="tmdb-no-poster">🎬</div>`;
+  const ratingHtml = rating ? `<div class="tmdb-rating">⭐ ${rating}</div>` : '';
+  // Escapamos el objeto para onclick
+  const dataStr = JSON.stringify({ id: r.id, type, title: r.title||r.name, year, rating, poster: r.poster_path||'', backdrop: r.backdrop_path||'' }).replace(/"/g, '&quot;');
+  return `<div class="tmdb-card" onclick="selectTmdbResult('${r.id}','${type}')">
+    ${imgHtml}
+    ${ratingHtml}
+    <div class="tmdb-card-info">
+      <div class="tmdb-card-title">${title}</div>
+      <div class="tmdb-card-year">${year || '–'}</div>
+    </div>
+  </div>`;
+}
+
+async function selectTmdbResult(id, type) {
+  const key = getTmdbKey();
+  if (!key) return;
+  document.getElementById('tmdb-results').innerHTML = `<div class="tmdb-loading">⏳ Cargando detalles…</div>`;
+
+  try {
+    const url = `https://api.themoviedb.org/3/${type}/${id}?api_key=${key}&language=es-AR`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Error ' + res.status);
+    const d = await res.json();
+
+    const posterUrl    = d.poster_path    ? TMDB_IMG + 'w500'  + d.poster_path    : '';
+    const backdropUrl  = d.backdrop_path  ? TMDB_IMG + 'w780'  + d.backdrop_path  : '';
+    const posterThumb  = d.poster_path    ? TMDB_IMG + 'w185'  + d.poster_path    : '';
+    const title        = d.title || d.name || '';
+    const year         = (d.release_date || d.first_air_date || '').slice(0, 4);
+    const rating       = d.vote_average   ? d.vote_average.toFixed(1) : '';
+    const overview     = d.overview || '';
+    const genres       = (d.genres || []).map(g => g.name).join(', ');
+    const tmdbId       = String(d.id || '');
+
+    // Autocompletar campos
+    const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+    set('ch-name', title);
+    set('ch-logo', posterUrl);
+    set('ch-backdrop', backdropUrl);
+    set('ch-year', year);
+    set('ch-rating', rating);
+    set('ch-desc', overview);
+    set('ch-genres', genres);
+    set('ch-tmdb-id', tmdbId);
+
+    previewImg('ch-logo', 'ch-logo-prev');
+    previewImg('ch-backdrop', 'ch-backdrop-prev');
+
+    // Limpiar resultados y mostrar banner de confirmación
+    document.getElementById('tmdb-results').innerHTML = '';
+    document.getElementById('tmdb-query').value = '';
+
+    const wrapEl = document.getElementById('tmdb-selected-wrap');
+    if (wrapEl) {
+      const thumbHtml = posterThumb
+        ? `<img src="${posterThumb}" alt="">`
+        : `<div style="width:34px;height:50px;background:var(--surface3);border-radius:4px;flex-shrink:0"></div>`;
+      wrapEl.innerHTML = `
+        <div class="tmdb-selected">
+          ${thumbHtml}
+          <div style="flex:1;min-width:0">
+            <div class="tmdb-selected-name">✓ ${title}</div>
+            <div class="tmdb-selected-sub">${year}${rating?' · ⭐ '+rating:''}${genres?' · '+genres:''}</div>
+            <div class="tmdb-selected-sub" style="margin-top:2px;color:var(--text3)">Campos autocompletados — podés editar cualquier cosa</div>
+          </div>
+          <button class="btn btn-ghost btn-xs" style="flex-shrink:0" onclick="document.getElementById('tmdb-selected-wrap').innerHTML=''">✕</button>
+        </div>`;
+    }
+
+    showToast(`"${title}" cargado desde TMDB ✓`, 'success');
+  } catch(e) {
+    document.getElementById('tmdb-results').innerHTML = '';
+    showToast('Error al cargar detalles: ' + e.message, 'error');
+  }
+}
+
+function clearTmdbResults() {
+  const r = document.getElementById('tmdb-results');
+  const w = document.getElementById('tmdb-selected-wrap');
+  const q = document.getElementById('tmdb-query');
+  if (r) r.innerHTML = '';
+  if (w) w.innerHTML = '';
+  if (q) q.value = '';
+}
+
+// ─── STREAMS ──────────────────────────────────────────────────────
 function addStreamRow(stream = null) {
   const container = document.getElementById('streams-list');
   if (!container) return;
@@ -1137,7 +1294,7 @@ function addStreamRow(stream = null) {
   const div = document.createElement('div');
   div.className = 'stream-row';
   div.innerHTML = `
-    <button class="stream-remove" onclick="this.parentElement.remove()" title="Eliminar señal">✕</button>
+    <button class="stream-remove" onclick="this.parentElement.remove()" title="Eliminar">✕</button>
     <div class="grid-2" style="gap:8px">
       <div><label class="form-label">Label</label><input class="form-input stream-label" value="${stream?.label||'Señal '+(idx+1)}" placeholder="Señal Principal"></div>
       <div><label class="form-label">Calidad</label><input class="form-input stream-quality" value="${stream?.quality||'HD'}" placeholder="HD / FHD / 4K"></div>
@@ -1151,7 +1308,7 @@ function addStreamRow(stream = null) {
   container.appendChild(div);
 }
 
-// ─── SEASONS / EPISODES ──────────────────────────────────────────
+// ─── SEASONS / EPISODES ───────────────────────────────────────────
 let _seasonCount = 0;
 function addSeasonBlock(season = null, si = null) {
   const container = document.getElementById('seasons-list');
@@ -1160,7 +1317,6 @@ function addSeasonBlock(season = null, si = null) {
   const sNum = season?.number ?? (sIdx + 1);
   const sName = season?.name || `Temporada ${sNum}`;
   const blockId = `season-block-${sIdx}`;
-
   const div = document.createElement('div');
   div.className = 'season-block';
   div.dataset.seasonIdx = sIdx;
@@ -1181,31 +1337,24 @@ function addSeasonBlock(season = null, si = null) {
       <div class="episodes-list" id="${blockId}-episodes"></div>
     </div>`;
   container.appendChild(div);
-
-  if (season?.episodes?.length) {
-    season.episodes.forEach((ep, ei) => addEpisodeRow(blockId, ep, ei));
-  } else {
-    addEpisodeRow(blockId);
-  }
+  if (season?.episodes?.length) season.episodes.forEach((ep, ei) => addEpisodeRow(blockId, ep, ei));
+  else addEpisodeRow(blockId);
 }
 
-function toggleSeasonBody(blockId) {
-  document.getElementById(blockId+'-body')?.classList.toggle('open');
-}
+function toggleSeasonBody(blockId) { document.getElementById(blockId+'-body')?.classList.toggle('open'); }
 
 function addEpisodeRow(blockId, ep = null, ei = null) {
   const container = document.getElementById(blockId+'-episodes');
   if (!container) return;
-  const epIdx = ei !== null ? ei : container.children.length;
-  const epNum = ep?.number ?? (epIdx + 1);
+  const epNum = ep?.number ?? (container.children.length + 1);
   const div = document.createElement('div');
   div.className = 'episode-row';
   div.innerHTML = `
-    <button class="ep-remove" onclick="this.parentElement.remove()" title="Eliminar episodio">✕</button>
+    <button class="ep-remove" onclick="this.parentElement.remove()">✕</button>
     <div class="grid-2" style="gap:8px">
       <div><label class="form-label">N° episodio</label><input class="form-input ep-number" type="number" value="${epNum}" min="1"></div>
       <div><label class="form-label">Nombre</label><input class="form-input ep-name" value="${ep?.name||''}" placeholder="Piloto"></div>
-      <div style="grid-column:span 2"><label class="form-label">URL <small>stream del episodio</small></label><input class="form-input ep-url" value="${ep?.streams?.[0]?.url||''}" placeholder="http://…/ep1.m3u8"></div>
+      <div style="grid-column:span 2"><label class="form-label">URL del stream</label><input class="form-input ep-url" value="${ep?.streams?.[0]?.url||''}" placeholder="http://…/ep.m3u8"></div>
       <div><label class="form-label">Tipo</label>
         <select class="form-select ep-type">
           ${['auto','hls','ts','dash','mp4'].map(t=>`<option value="${t}" ${ep?.streams?.[0]?.type===t?'selected':''}>${t.toUpperCase()}</option>`).join('')}
@@ -1217,7 +1366,7 @@ function addEpisodeRow(blockId, ep = null, ei = null) {
   container.appendChild(div);
 }
 
-// ─── GUARDAR CANAL / PELÍCULA / SERIE ────────────────────────────
+// ─── GUARDAR CANAL/PELICULA/SERIE ─────────────────────────────────
 async function saveChannel() {
   const cat = categories.find(c => c.id === addChannelCatId);
   if (!cat) return;
@@ -1234,16 +1383,17 @@ async function saveChannel() {
     order: editChannelIndex >= 0 ? editChannelIndex : (cat.channels||[]).length,
   };
 
-  // Campos extra películas/series
-  const backdropEl = document.getElementById('ch-backdrop');
-  if (backdropEl) channel.backdropUrl = backdropEl.value.trim();
-  const yearEl = document.getElementById('ch-year');
-  if (yearEl) channel.year = yearEl.value.trim();
-  const ratingEl = document.getElementById('ch-rating');
-  if (ratingEl) channel.rating = ratingEl.value.trim();
+  const setField = (key, id) => {
+    const el = document.getElementById(id);
+    if (el) channel[key] = el.value.trim();
+  };
+  setField('backdropUrl', 'ch-backdrop');
+  setField('year', 'ch-year');
+  setField('rating', 'ch-rating');
+  setField('genres', 'ch-genres');
+  setField('tmdbId', 'ch-tmdb-id');
 
   if (!isSeries) {
-    // TV / Películas → streams
     const streamRows = document.querySelectorAll('#streams-list .stream-row');
     channel.streams = Array.from(streamRows).map((row, i) => ({
       id: 's' + Date.now() + i,
@@ -1254,11 +1404,10 @@ async function saveChannel() {
       headers: {}
     })).filter(s => s.url);
   } else {
-    // Series → seasons con episodes
     const seasonBlocks = document.querySelectorAll('#seasons-list .season-block');
     channel.seasons = Array.from(seasonBlocks).map(block => {
-      const sName = block.querySelector('.season-name')?.value.trim() || '';
       const sNum = parseInt(block.querySelector('.season-number')?.value) || 1;
+      const sName = block.querySelector('.season-name')?.value.trim() || '';
       const epRows = block.querySelectorAll('.episode-row');
       const episodes = Array.from(epRows).map(ep => {
         const url = ep.querySelector('.ep-url')?.value.trim() || '';
@@ -1299,7 +1448,7 @@ async function deleteChannel(catId, channelIndex) {
   } catch(e) { showToast('Error: ' + e.message, 'error'); }
 }
 
-// ─── CONFIG ─────────────────────────────────────────────────────
+// ─── CONFIG ───────────────────────────────────────────────────────
 async function loadConfig() {
   try {
     const snap = await fns.getDoc(fns.doc(db, 'config', 'app'));
@@ -1316,23 +1465,24 @@ async function loadConfig() {
     setChk('cfg-showTv', c.showTv !== false);
     setChk('cfg-showMovies', c.showMovies !== false);
     setChk('cfg-showSeries', c.showSeries !== false);
-    // Colors
     const pCol = c.primaryColor || '#e50914';
     const sCol = c.secondaryColor || '#0d0d12';
     const aCol = c.accentColor || '#ffffff';
     setVal('cfg-primaryColor', pCol); setVal('cfg-primaryColorHex', pCol);
     setVal('cfg-secondaryColor', sCol); setVal('cfg-secondaryColorHex', sCol);
     setVal('cfg-accentColor', aCol); setVal('cfg-accentColorHex', aCol);
-    // Preview logos
     if (c.logoUrl) { const el = document.getElementById('prev-logo'); el.src=c.logoUrl; el.classList.add('visible'); }
     if (c.splashLogoUrl) { const el = document.getElementById('prev-splash'); el.src=c.splashLogoUrl; el.classList.add('visible'); }
   } catch(e) {}
-  // Bind color inputs
   ['primary','secondary','accent'].forEach(k => {
     document.getElementById(`cfg-${k}Color`)?.addEventListener('input', e => setVal(`cfg-${k}ColorHex`, e.target.value));
     document.getElementById(`cfg-${k}ColorHex`)?.addEventListener('input', e => {
       if (/^#[0-9A-Fa-f]{6}$/.test(e.target.value)) setVal(`cfg-${k}Color`, e.target.value);
     });
+  });
+  // Guardar TMDB key al cambiar
+  document.getElementById('cfg-tmdbKey')?.addEventListener('change', e => {
+    saveTmdbKeyLocally(e.target.value.trim());
   });
 }
 
@@ -1353,13 +1503,16 @@ async function saveConfig() {
     showMovies: getChk('cfg-showMovies'),
     showSeries: getChk('cfg-showSeries'),
   };
+  // Guardar TMDB key localmente (no en Firebase)
+  const tmdbKey = getVal('cfg-tmdbKey');
+  if (tmdbKey) saveTmdbKeyLocally(tmdbKey);
   try {
     await fns.setDoc(fns.doc(db, 'config', 'app'), data);
     showToast('Configuración guardada ✓', 'success');
   } catch(e) { showToast('Error: ' + e.message, 'error'); }
 }
 
-// ─── DASHBOARD ──────────────────────────────────────────────────
+// ─── DASHBOARD ────────────────────────────────────────────────────
 function renderDashboard() {
   const now = new Date();
   const weekAhead = new Date(); weekAhead.setDate(weekAhead.getDate() + 7);
@@ -1374,7 +1527,6 @@ function renderDashboard() {
   setEl('stat-active', active.length);
   setEl('stat-items', totalItems);
   setEl('stat-expiring', expiring.length);
-
   const recent = [...users].sort((a,b) => (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)).slice(0,6);
   const tbody = document.getElementById('recent-users-body');
   if (!tbody) return;
@@ -1403,14 +1555,14 @@ function updateSectionCounts() {
   });
 }
 
-// ─── MODAL HELPERS ──────────────────────────────────────────────
+// ─── MODAL HELPERS ────────────────────────────────────────────────
 function openModal(id) { document.getElementById(id)?.classList.add('open'); }
 function closeModal(id) { document.getElementById(id)?.classList.remove('open'); }
 document.querySelectorAll('.modal-overlay').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
 });
 
-// ─── TOAST ──────────────────────────────────────────────────────
+// ─── TOAST ────────────────────────────────────────────────────────
 function showToast(msg, type = 'success') {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div');
@@ -1419,13 +1571,10 @@ function showToast(msg, type = 'success') {
   toast.innerHTML = `<span>${icon}</span><span>${msg}</span>`;
   container.appendChild(toast);
   requestAnimationFrame(() => { requestAnimationFrame(() => toast.classList.add('show')); });
-  setTimeout(() => {
-    toast.classList.remove('show');
-    setTimeout(() => toast.remove(), 300);
-  }, 3200);
+  setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3200);
 }
 
-// ─── PREVIEW IMAGE ──────────────────────────────────────────────
+// ─── PREVIEW IMAGE ────────────────────────────────────────────────
 function previewImg(inputId, previewId) {
   const url = document.getElementById(inputId)?.value.trim();
   const el = document.getElementById(previewId);
@@ -1434,20 +1583,20 @@ function previewImg(inputId, previewId) {
   else el.classList.remove('visible');
 }
 
-// ─── DOM HELPERS ────────────────────────────────────────────────
+// ─── DOM HELPERS ──────────────────────────────────────────────────
 function setVal(id, val) { const el = document.getElementById(id); if(el) el.value = val ?? ''; }
 function getVal(id) { return document.getElementById(id)?.value.trim() || ''; }
 function setChk(id, val) { const el = document.getElementById(id); if(el) el.checked = !!val; }
 function getChk(id) { return document.getElementById(id)?.checked || false; }
 function setEl(id, val) { const el = document.getElementById(id); if(el) el.textContent = val; }
 
-// ─── SHA256 ─────────────────────────────────────────────────────
+// ─── SHA256 ───────────────────────────────────────────────────────
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
-// ─── ESC para cerrar modales ────────────────────────────────────
+// ─── ESC ─────────────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
